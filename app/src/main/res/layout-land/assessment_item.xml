@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
+
+    <TextView
+        android:id="@+id/textAssessmentName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Assessment Name"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textAssessmentType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textAssessmentEnd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="End Date"
+        android:textSize="14sp" />
+
+</LinearLayout>

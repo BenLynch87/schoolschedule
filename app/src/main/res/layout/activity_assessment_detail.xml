@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/assessmentTypeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Assessment Type"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/assessmentTitleField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Assessment Title"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/assessmentStartField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Start Date (YYYY-MM-DD)"
+            android:inputType="date"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/assessmentEndField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Due Date (YYYY-MM-DD)"
+            android:inputType="date"
+            android:layout_marginTop="8dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addChecklistButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Add Checklist Item"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+        <LinearLayout
+            android:id="@+id/checklistContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/saveAssessmentButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Assessment"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+</ScrollView>

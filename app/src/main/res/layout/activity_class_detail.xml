@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.ClassDetailActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/textClassNameField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Class Name" />
+
+        <Spinner
+            android:id="@+id/TermList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/instructorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Instructor Name" />
+
+        <EditText
+            android:id="@+id/instructorPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Instructor Phone" />
+
+        <EditText
+            android:id="@+id/instructorEMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Instructor Email" />
+
+        <Button
+            android:id="@+id/DateStartPickerbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="dateStartPicker"
+            android:text="Select Start Date" />
+
+        <Button
+            android:id="@+id/DateEndPickerbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="dateEndPicker"
+            android:text="Select End Date" />
+
+        <Spinner
+            android:id="@+id/Status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/Class_Status" />
+
+        <EditText
+            android:id="@+id/classNote"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="Class Notes"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:scrollbars="vertical" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/noteShareButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="shareNote"
+            app:srcCompat="@android:drawable/ic_menu_share"
+            android:contentDescription="Share Note" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/SaveAssessmentButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="saveClass"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/CancelAssessmentButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="cancelClass"
+                android:text="Cancel" />
+
+            <Button
+                android:id="@+id/DeleteAssessmentButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="deleteClass"
+                android:text="Delete" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Assessments"
+            android:textStyle="bold"
+            android:paddingTop="16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/classAssessmentList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:clipToPadding="false" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="addAssessment"
+            app:srcCompat="@android:drawable/ic_menu_add"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="end"
+            android:contentDescription="Add Assessment" />
+
+    </LinearLayout>
+</ScrollView>
