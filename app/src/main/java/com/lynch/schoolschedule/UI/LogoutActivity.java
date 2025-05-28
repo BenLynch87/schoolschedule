@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.lynch.schoolschedule.helper.SessionManager;
+import com.lynch.schoolschedule.Helpers.SessionManager;
 
 public class LogoutActivity extends AppCompatActivity {
     @Override

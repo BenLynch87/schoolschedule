@@ -2,13 +2,13 @@ package com.lynch.schoolschedule.Entities;
 
 public class TermEntity {
     private int id;
-    private String name;
+    private String termName;
     private String startDate;
     private String endDate;
 
-    public TermEntity(int id, String name, String startDate, String endDate) {
+    public TermEntity(int id, String termName, String startDate, String endDate) {
         this.id = id;
-        this.name = name;
+        this.termName = termName;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -17,8 +17,8 @@ public class TermEntity {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getTermName() {
+        return termName;
     }
 
     public String getStartDate() {
@@ -33,8 +33,8 @@ public class TermEntity {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTermName(String termName) {
+        this.termName = termName;
     }
 
     public void setStartDate(String startDate) {

@@ -2,11 +2,11 @@ package com.lynch.schoolschedule.Database;
 
 import android.content.Context;
 
-import com.lynch.schoolschedule.helper.AssessmentHelper;
-import com.lynch.schoolschedule.helper.ChecklistHelper;
-import com.lynch.schoolschedule.helper.ClassHelper;
-import com.lynch.schoolschedule.helper.TermHelper;
-import com.lynch.schoolschedule.helper.UserHelper;
+import com.lynch.schoolschedule.Helpers.AssessmentHelper;
+import com.lynch.schoolschedule.Helpers.ChecklistHelper;
+import com.lynch.schoolschedule.Helpers.ClassHelper;
+import com.lynch.schoolschedule.Helpers.TermHelper;
+import com.lynch.schoolschedule.Helpers.UserHelper;
 
 public class DatabaseManager {
 

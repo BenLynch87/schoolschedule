@@ -1,5 +1,5 @@
 
-package com.lynch.schoolschedule.helper;
+package com.lynch.schoolschedule.Helpers;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

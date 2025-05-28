@@ -1,68 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/assessment_detail_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/edit_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:hint="Title" />
 
-        <TextView
-            android:id="@+id/assessmentTypeLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Assessment Type"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+    <EditText
+        android:id="@+id/edit_due_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Due Date" />
 
-        <EditText
-            android:id="@+id/assessmentTitleField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Assessment Title"
-            android:inputType="text" />
+    <EditText
+        android:id="@+id/edit_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type" />
 
-        <EditText
-            android:id="@+id/assessmentStartField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Start Date (YYYY-MM-DD)"
-            android:inputType="date"
-            android:layout_marginTop="8dp" />
+    <Spinner
+        android:id="@+id/class_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/assessmentEndField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Due Date (YYYY-MM-DD)"
-            android:inputType="date"
-            android:layout_marginTop="8dp" />
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addChecklistButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="16dp"
-            android:contentDescription="Add Checklist Item"
-            app:srcCompat="@android:drawable/ic_input_add" />
-
-        <LinearLayout
-            android:id="@+id/checklistContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="16dp" />
-
-        <Button
-            android:id="@+id/saveAssessmentButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save Assessment"
-            android:layout_marginTop="16dp" />
-
-    </LinearLayout>
-</ScrollView>
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete" />
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.lynch.schoolschedule.helper;
+package com.lynch.schoolschedule.Helpers;
 
 import android.content.Context;
 import android.text.TextUtils;

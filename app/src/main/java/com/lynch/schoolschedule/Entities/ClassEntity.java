@@ -2,22 +2,22 @@ package com.lynch.schoolschedule.Entities;
 
 public class ClassEntity {
     private int id;
-    private int termId;
-    private String name;
+    private String className;
     private String instructor;
     private String startDate;
     private String endDate;
     private String status;
+    private int termId;
     private String notes;
 
-    public ClassEntity(int id, int termId, String name, String instructor, String startDate, String endDate, String status, String notes) {
+    public ClassEntity(int id, String className, String instructor, String startDate, String endDate, String status, int termId, String notes) {
         this.id = id;
-        this.termId = termId;
-        this.name = name;
+        this.className = className;
         this.instructor = instructor;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
+        this.termId = termId;
         this.notes = notes;
     }
 
@@ -25,12 +25,8 @@ public class ClassEntity {
         return id;
     }
 
-    public int getTermId() {
-        return termId;
-    }
-
-    public String getName() {
-        return name;
+    public String getClassName() {
+        return className;
     }
 
     public String getInstructor() {
@@ -49,6 +45,10 @@ public class ClassEntity {
         return status;
     }
 
+    public int getTermId() {
+        return termId;
+    }
+
     public String getNotes() {
         return notes;
     }
@@ -57,12 +57,8 @@ public class ClassEntity {
         this.id = id;
     }
 
-    public void setTermId(int termId) {
-        this.termId = termId;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public void setInstructor(String instructor) {
@@ -79,6 +75,10 @@ public class ClassEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setTermId(int termId) {
+        this.termId = termId;
     }
 
     public void setNotes(String notes) {

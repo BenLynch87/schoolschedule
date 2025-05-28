@@ -1,9 +1,6 @@
 package com.lynch.schoolschedule.UI;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -13,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.lynch.schoolschedule.R;
 import com.lynch.schoolschedule.Users.User;
-import com.lynch.schoolschedule.helper.UserManager;
-import com.lynch.schoolschedule.helper.UserManager.AuthCallback;
-import com.lynch.schoolschedule.helper.UserManager.UserCallback;
+import com.lynch.schoolschedule.Helpers.UserManager;
+import com.lynch.schoolschedule.Helpers.UserManager.AuthCallback;
+import com.lynch.schoolschedule.Helpers.UserManager.UserCallback;
 
 public class LoginRegisterActivity extends AppCompatActivity {
 
