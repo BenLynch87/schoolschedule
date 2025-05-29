@@ -19,9 +19,9 @@ import java.util.List;
 public class ClassDetailActivity extends AppCompatActivity {
 
     private DatabaseManager repository;
-    private EditText nameField, instructorField, startField, endField, notesField;
+    private EditText nameField, instructorField, notesField;
     private Spinner termSpinner, statusSpinner;
-    private Button saveButton, deleteButton;
+    private Button startButton, endButton, saveButton, deleteButton;
     private int classId = -1;
     private HashMap<String, Integer> termMap = new HashMap<>();
 
@@ -31,15 +31,15 @@ public class ClassDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_class_detail);
 
         repository = DatabaseManager.getInstance(this);
-        nameField = findViewById(R.id.class_name);
-        instructorField = findViewById(R.id.class_instructor);
-        startField = findViewById(R.id.class_start);
-        endField = findViewById(R.id.class_end);
-        notesField = findViewById(R.id.class_notes);
-        termSpinner = findViewById(R.id.term_spinner);
-        statusSpinner = findViewById(R.id.class_status);
-        saveButton = findViewById(R.id.class_save);
-        deleteButton = findViewById(R.id.class_delete);
+        nameField = findViewById(R.id.textClassNameField);
+        instructorField = findViewById(R.id.instructorName);
+        startButton = findViewById(R.id.DateStartPickerbutton);
+        endButton = findViewById(R.id.DateEndPickerbutton);
+        notesField = findViewById(R.id.classNote);
+        termSpinner = findViewById(R.id.TermList);
+        statusSpinner = findViewById(R.id.Status);
+        saveButton = findViewById(R.id.SaveAssessmentButton);
+        deleteButton = findViewById(R.id.DeleteAssessmentButton);
 
         saveButton.setOnClickListener(v -> saveClass());
         deleteButton.setOnClickListener(v -> deleteClass());
@@ -49,24 +49,24 @@ public class ClassDetailActivity extends AppCompatActivity {
         termAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         for (TermEntity t : terms) {
-            termAdapter.add(t.getName());
-            termMap.put(t.getName(), t.getId());
+            termAdapter.add(t.getTermName());
+            termMap.put(t.getTermName(), t.getId());
         }
         termSpinner.setAdapter(termAdapter);
 
-        ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter.createFromResource(this, R.array.class_status_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter.createFromResource(this, R.array.Class_Status, android.R.layout.simple_spinner_item);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         statusSpinner.setAdapter(statusAdapter);
 
-        ClassEntity cls = new ClassEntity(0, 1, "Math", "Dr. Smith", "2025-01-01", "2025-05-01", "In Progress", "Syllabus Notes");
+        ClassEntity cls = new ClassEntity(1, "Math", "Dr. Smith", "2025-01-01","2025-05-01" ,"In Progress" ,1 , "Syllabus Notes");
         classId = (int) repository.getClassHelper().insertClass(cls);
 
         ClassEntity fetched = repository.getClassHelper().getClass(classId);
         if (fetched != null) {
-            nameField.setText(fetched.getName());
+            nameField.setText(fetched.getClassName());
             instructorField.setText(fetched.getInstructor());
-            startField.setText(fetched.getStartDate());
-            endField.setText(fetched.getEndDate());
+            startButton.setText(fetched.getStartDate());
+            endButton.setText(fetched.getEndDate());
             notesField.setText(fetched.getNotes());
             for (String key : termMap.keySet()) {
                 if (termMap.get(key) == fetched.getTermId()) {
@@ -82,8 +82,8 @@ public class ClassDetailActivity extends AppCompatActivity {
     private void saveClass() {
         String name = nameField.getText().toString();
         String instructor = instructorField.getText().toString();
-        String start = startField.getText().toString();
-        String end = endField.getText().toString();
+        String start = startButton.getText().toString();
+        String end = endButton.getText().toString();
         String notes = notesField.getText().toString();
         String status = (String) statusSpinner.getSelectedItem();
         String selectedTerm = (String) termSpinner.getSelectedItem();
@@ -94,7 +94,7 @@ public class ClassDetailActivity extends AppCompatActivity {
         }
 
         int termId = termMap.getOrDefault(selectedTerm, 1);
-        ClassEntity cls = new ClassEntity(classId, termId, name, instructor, start, end, status, notes);
+        ClassEntity cls = new ClassEntity(classId, name, instructor, start, end, status, termId, notes);
         repository.getClassHelper().updateClass(cls);
     }
 

@@ -12,8 +12,8 @@ import com.lynch.schoolschedule.R;
 public class TermDetailActivity extends AppCompatActivity {
 
     private DatabaseManager repository;
-    private EditText titleField, startField, endField;
-    private Button saveButton, deleteButton;
+    private EditText titleField;
+    private Button saveButton, startButton, endButton, deleteButton;
     private int termId = -1;
 
     @Override
@@ -22,11 +22,11 @@ public class TermDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_term_detail);
 
         repository = DatabaseManager.getInstance(this);
-        titleField = findViewById(R.id.term_title);
-        startField = findViewById(R.id.term_start);
-        endField = findViewById(R.id.term_end);
-        saveButton = findViewById(R.id.term_save);
-        deleteButton = findViewById(R.id.term_delete);
+        titleField = findViewById(R.id.TermNameField);
+        startButton = findViewById(R.id.DateStartPickerbuttonc);
+        endButton = findViewById(R.id.DateEndPickerbuttonc);
+        saveButton = findViewById(R.id.SaveAssessmentButton);
+        deleteButton = findViewById(R.id.DeleteAssessmentButton);
 
         saveButton.setOnClickListener(v -> saveTerm());
         deleteButton.setOnClickListener(v -> deleteTerm());
@@ -36,16 +36,16 @@ public class TermDetailActivity extends AppCompatActivity {
 
         TermEntity fetched = repository.getTermHelper().getTerm(termId);
         if (fetched != null) {
-            titleField.setText(fetched.getName());
-            startField.setText(fetched.getStartDate());
-            endField.setText(fetched.getEndDate());
+            titleField.setText(fetched.getTermName());
+            startButton.setText(fetched.getStartDate());
+            endButton.setText(fetched.getEndDate());
         }
     }
 
     private void saveTerm() {
         String title = titleField.getText().toString();
-        String start = startField.getText().toString();
-        String end = endField.getText().toString();
+        String start = startButton.getText().toString();
+        String end = endButton.getText().toString();
         TermEntity term = new TermEntity(termId, title, start, end);
         repository.getTermHelper().updateTerm(term);
     }

@@ -23,7 +23,7 @@ public class ClassHelper {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("term_id", cls.getTermId());
-        values.put("name", cls.getName());
+        values.put("name", cls.getClassName());
         values.put("instructor", cls.getInstructor());
         values.put("start_date", cls.getStartDate());
         values.put("end_date", cls.getEndDate());
@@ -36,7 +36,7 @@ public class ClassHelper {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("term_id", cls.getTermId());
-        values.put("name", cls.getName());
+        values.put("name", cls.getClassName());
         values.put("instructor", cls.getInstructor());
         values.put("start_date", cls.getStartDate());
         values.put("end_date", cls.getEndDate());
@@ -56,12 +56,12 @@ public class ClassHelper {
         if (cursor != null && cursor.moveToFirst()) {
             ClassEntity cls = new ClassEntity(
                     cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("term_id")),
                     cursor.getString(cursor.getColumnIndexOrThrow("name")),
                     cursor.getString(cursor.getColumnIndexOrThrow("instructor")),
                     cursor.getString(cursor.getColumnIndexOrThrow("start_date")),
                     cursor.getString(cursor.getColumnIndexOrThrow("end_date")),
                     cursor.getString(cursor.getColumnIndexOrThrow("status")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("term_id")),
                     cursor.getString(cursor.getColumnIndexOrThrow("notes"))
             );
             cursor.close();
@@ -78,12 +78,12 @@ public class ClassHelper {
             do {
                 ClassEntity cls = new ClassEntity(
                         cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                        cursor.getInt(cursor.getColumnIndexOrThrow("term_id")),
                         cursor.getString(cursor.getColumnIndexOrThrow("name")),
                         cursor.getString(cursor.getColumnIndexOrThrow("instructor")),
                         cursor.getString(cursor.getColumnIndexOrThrow("start_date")),
                         cursor.getString(cursor.getColumnIndexOrThrow("end_date")),
                         cursor.getString(cursor.getColumnIndexOrThrow("status")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("term_id")),
                         cursor.getString(cursor.getColumnIndexOrThrow("notes"))
                 );
                 classes.add(cls);
@@ -101,12 +101,12 @@ public class ClassHelper {
             do {
                 ClassEntity cls = new ClassEntity(
                         cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                        cursor.getInt(cursor.getColumnIndexOrThrow("term_id")),
                         cursor.getString(cursor.getColumnIndexOrThrow("name")),
                         cursor.getString(cursor.getColumnIndexOrThrow("instructor")),
                         cursor.getString(cursor.getColumnIndexOrThrow("start_date")),
                         cursor.getString(cursor.getColumnIndexOrThrow("end_date")),
                         cursor.getString(cursor.getColumnIndexOrThrow("status")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("term_id")),
                         cursor.getString(cursor.getColumnIndexOrThrow("notes"))
                 );
                 classes.add(cls);

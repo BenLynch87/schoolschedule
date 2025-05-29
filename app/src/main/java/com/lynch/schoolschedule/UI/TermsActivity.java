@@ -28,16 +28,14 @@ public class TermsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.termRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        repository = new Repository(getApplication());
+        repository = Repository.getInstance(getApplication());
         adapter = new TermAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        repository.getAllTerms().observe(this, new Observer<List<TermEntity>>() {
-            @Override
-            public void onChanged(List<TermEntity> termEntities) {
-                adapter.setTerms(termEntities);
-            }
-        });
+        List<TermEntity> terms = repository.getAllTerms();
+        adapter.setTerms(terms);
+
+
     }
 
     public void addTerm(View view) {

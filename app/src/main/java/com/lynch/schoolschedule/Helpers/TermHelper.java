@@ -22,7 +22,7 @@ public class TermHelper {
     public long insertTerm(TermEntity term) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("name", term.getName());
+        values.put("name", term.getTermName());
         values.put("start_date", term.getStartDate());
         values.put("end_date", term.getEndDate());
         return db.insert("terms", null, values);
@@ -66,7 +66,7 @@ public class TermHelper {
     public int updateTerm(TermEntity term) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("name", term.getName());
+        values.put("name", term.getTermName());
         values.put("start_date", term.getStartDate());
         values.put("end_date", term.getEndDate());
         return db.update("terms", values, "id = ?", new String[]{String.valueOf(term.getId())});

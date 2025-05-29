@@ -29,13 +29,11 @@ public class ClassActivity extends AppCompatActivity {
         adapter = new ClassAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        repository = new Repository(getApplication());
-        repository.getAllClasses().observe(this, new Observer<List<ClassEntity>>() {
-            @Override
-            public void onChanged(List<ClassEntity> classEntities) {
-                adapter.setClasses(classEntities);
-            }
-        });
+        repository = Repository.getInstance(getApplication());
+
+        List<ClassEntity> classes = repository.getAllClasses();
+        adapter.setClasses(classes);
+
     }
 
     public void addClass(View view) {

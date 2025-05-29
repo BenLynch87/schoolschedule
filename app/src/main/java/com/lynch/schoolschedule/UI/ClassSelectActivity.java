@@ -27,7 +27,7 @@ public class ClassSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_select);
 
-        repository = new Repository(getApplication());
+        repository = Repository.getInstance(getApplication());
         recyclerView = findViewById(R.id.selectableClassList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -38,25 +38,12 @@ public class ClassSelectActivity extends AppCompatActivity {
 
         adapter.setOnClassSelectListener(selected -> {
             selected.setTermId(termId);
-            repository.update(selected);
+            repository.updateClass(selected);
             setResult(RESULT_OK);
             finish();
         });
 
-        repository.getAllClasses().observe(this, new Observer<List<ClassEntity>>() {
-            @Override
-            public void onChanged(List<ClassEntity> allClasses) {
-                List<ClassEntity> eligible = new ArrayList<>();
-                for (ClassEntity c : allClasses) {
-                    if (c.getTermId() != termId) {
-                        eligible.add(c);
-                    }
-                }
-                if (eligible.isEmpty()) {
-                    Toast.makeText(ClassSelectActivity.this, "No eligible classes available", Toast.LENGTH_SHORT).show();
-                }
-                adapter.setClasses(eligible);
-            }
-        });
+        List<ClassEntity> classes = repository.getAllClasses();
+        adapter.setClasses(classes);
     }
 }

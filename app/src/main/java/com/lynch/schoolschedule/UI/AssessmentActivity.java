@@ -24,10 +24,10 @@ public class AssessmentActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assessment);
+        setContentView(R.layout.activity_assessments);
 
         repository = Repository.getInstance(this);
-        listView = findViewById(R.id.assessment_list);
+        listView = findViewById(R.id.allAssessmentList);
 
         assessments = repository.getAllAssessments();
 

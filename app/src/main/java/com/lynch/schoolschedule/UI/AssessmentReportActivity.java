@@ -12,24 +12,18 @@ import java.util.List;
 public class AssessmentReportActivity extends AppCompatActivity {
     private Repository repository;
     private TextView reportView;
+    private AssessmentAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessment_report);
 
-        repository = new Repository(getApplication());
+        repository = Repository.getInstance(getApplication());
         reportView = findViewById(R.id.report_text);
 
-        repository.getAllAssessments().observe(this, new Observer<List<Assessment>>() {
-            @Override
-            public void onChanged(List<Assessment> assessments) {
-                StringBuilder reportBuilder = new StringBuilder();
-                for (Assessment a : assessments) {
-                    reportBuilder.append(a.getReportLine()).append("\n");
-                }
-                reportView.setText(reportBuilder.toString());
-            }
-        });
+        List<Assessment> assessments= repository.getAllAssessments();
+        adapter.setAssessments(assessments);
+
     }
 }
