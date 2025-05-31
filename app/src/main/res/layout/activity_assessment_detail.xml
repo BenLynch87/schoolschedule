@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout   xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/assessment_detail_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    >
 
     <EditText
         android:id="@+id/edit_title"
@@ -16,26 +16,55 @@
         android:id="@+id/edit_due_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Due Date" />
+        android:hint="Due Date"
+        android:focusable="false"
+        android:clickable="true" />
 
-    <EditText
-        android:id="@+id/edit_type"
+    <Spinner
+        android:id="@+id/spinner_type"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Type" />
+        android:layout_height="wrap_content" />
 
     <Spinner
         android:id="@+id/class_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button
+  <!-- Checklist section -->
+<LinearLayout
+    android:background="@color/backgroundColor"
+    android:padding="16dp"
+    android:id="@+id/checklist_section"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <TextView style="@style/BodyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Checklist Items:" />
+
+    <Button style="@style/AppButton"
+        android:id="@+id/button_add_checklist_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Item" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_checklist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
+</LinearLayout>
+
+    <Button style="@style/AppButton"
         android:id="@+id/save_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save" />
 
-    <Button
+    <Button style="@style/AppButton"
         android:id="@+id/delete_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

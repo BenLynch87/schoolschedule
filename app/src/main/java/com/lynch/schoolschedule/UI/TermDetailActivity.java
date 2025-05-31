@@ -56,7 +56,7 @@ public class TermDetailActivity extends Activity  {
 
         termId = getIntent().getIntExtra("termId", -1);
         if (termId != -1) {
-            TermEntity term = repository.getTerm(termId);
+            TermEntity term = repository.getTermById(termId);
             if (term != null) {
                 titleField.setText(term.getTermName());
                 startDateButton.setText(LocalDateTime.parse(term.getStartDate()).format(displayFormatter));
@@ -111,10 +111,10 @@ public class TermDetailActivity extends Activity  {
         LocalDateTime startDate;
         LocalDateTime endDate;
         try {
-            startDate = LocalDateTime.parse(startDateStr, storageFormatter);
-            endDate = LocalDateTime.parse(endDateStr, storageFormatter);
+            startDate = LocalDateTime.parse(startDateStr.replace(" ", "T"));
+            endDate = LocalDateTime.parse(endDateStr.replace(" ", "T"));
         } catch (Exception e) {
-            Toast.makeText(this, "Invalid date format", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Date parsing failed", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -128,7 +128,7 @@ public class TermDetailActivity extends Activity  {
 
     private void deleteTerm() {
         if (termId != -1) {
-            TermEntity term = repository.getTerm(termId);
+            TermEntity term = repository.getTermById(termId);
             repository.deleteTerm(term.getId());
         }
         finish();

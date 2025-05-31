@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#BB86FC</color>
-    <color name="purple_500">#6200EE</color>
-    <color name="purple_700">#3700B3</color>
-    <color name="teal_200">#03DAC5</color>
-    <color name="teal_700">#018786</color>
+    <!-- Primary color palette -->
+    <color name="colorPrimary">#3F51B5</color> <!-- Default blue -->
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- Common colors -->
+    <color name="backgroundColor">#FFFFFF</color> <!-- White background -->
+    <color name="textColorPrimary">#212121</color> <!-- Primary text color -->
+    <color name="errorColor">#D32F2F</color> <!-- Red error -->
+    <color name="itemBackground">#F5F5F5</color> <!-- Light gray -->
+
+
+    <!-- Additional needed colors -->
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="teal_200">#03DAC5</color> <!-- Standard teal -->
+    <color name="teal_700">#018786</color> <!-- Standard teal -->
+    <color name="purple_200">#BB86FC</color>
+    <color name="purple_700">#3700B3</color>
 </resources>

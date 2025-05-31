@@ -15,8 +15,7 @@ public class ClassHelper {
 
     private final SchoolScheduleDbHelper dbHelper;
 
-    public ClassHelper(Context context) {
-        this.dbHelper = new SchoolScheduleDbHelper(context);
+    public ClassHelper(Context context) { dbHelper = new SchoolScheduleDbHelper(context);
     }
 
     public long insertClass(ClassEntity cls) {
@@ -25,6 +24,8 @@ public class ClassHelper {
         values.put("term_id", cls.getTermId());
         values.put("name", cls.getClassName());
         values.put("instructor", cls.getInstructor());
+        values.put("phone", cls.getPhone());
+        values.put("email", cls.getEmail());
         values.put("start_date", cls.getStartDate());
         values.put("end_date", cls.getEndDate());
         values.put("status", cls.getStatus());
@@ -38,6 +39,8 @@ public class ClassHelper {
         values.put("term_id", cls.getTermId());
         values.put("name", cls.getClassName());
         values.put("instructor", cls.getInstructor());
+        values.put("phone", cls.getPhone());
+        values.put("email", cls.getEmail());
         values.put("start_date", cls.getStartDate());
         values.put("end_date", cls.getEndDate());
         values.put("status", cls.getStatus());
@@ -121,4 +124,30 @@ public class ClassHelper {
         }
         return classes;
     }
+    public List<ClassEntity> searchClasses(String query) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        List<ClassEntity> results = new ArrayList<>();
+        String sql = "SELECT * FROM classes WHERE name LIKE ?";
+        String[] args = {"%" + query + "%"};
+        Cursor cursor = db.rawQuery(sql, args);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            String className = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            String instructor = cursor.getString(cursor.getColumnIndexOrThrow("instructor"));
+            String startDate = cursor.getString(cursor.getColumnIndexOrThrow("start_date"));
+            String endDate = cursor.getString(cursor.getColumnIndexOrThrow("end_date"));
+            String status = cursor.getString(cursor.getColumnIndexOrThrow("status"));
+            int termId = cursor.getInt(cursor.getColumnIndexOrThrow("term_id"));
+            String notes = cursor.getString(cursor.getColumnIndexOrThrow("notes"));
+            String phone = cursor.getString(cursor.getColumnIndexOrThrow("phone"));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+
+            ClassEntity classEntity = new ClassEntity(id, className, instructor, startDate, endDate, status, termId, notes, phone, email);
+            results.add(classEntity);
+        }
+        cursor.close();
+        return results;
+    }
+
+
 }

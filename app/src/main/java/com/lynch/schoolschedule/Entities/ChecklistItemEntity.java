@@ -2,19 +2,19 @@ package com.lynch.schoolschedule.Entities;
 
 public class ChecklistItemEntity {
     private int id;
-    private int classId;
+    private int assessmentId;
     private String content;
     private boolean isDone;
 
-    public ChecklistItemEntity(int id, int classId, String content, boolean isDone) {
+    public ChecklistItemEntity(int id, int assessmentId, String content, boolean isDone) {
         this.id = id;
-        this.classId = classId;
+        this.assessmentId = assessmentId;
         this.content = content;
         this.isDone = isDone;
     }
 
     public ChecklistItemEntity(int classId, String content, boolean isDone) {
-        this.classId = classId;
+        this.assessmentId = classId;
         this.content = content;
         this.isDone = isDone;
     }
@@ -23,8 +23,8 @@ public class ChecklistItemEntity {
         return id;
     }
 
-    public int getClassId() {
-        return classId;
+    public int getAssessmentId() {
+        return assessmentId;
     }
 
     public String getContent() {
@@ -39,8 +39,8 @@ public class ChecklistItemEntity {
         this.id = id;
     }
 
-    public void setClassId(int classId) {
-        this.classId = classId;
+    public void setAssessmentId(int assessmentId) {
+        this.assessmentId = assessmentId;
     }
 
     public void setContent(String content) {

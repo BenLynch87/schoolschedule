@@ -41,5 +41,11 @@ public class TermsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<TermEntity> terms = repository.getAllTerms();
+        adapter.setTerms(terms);
+    }
 
 }

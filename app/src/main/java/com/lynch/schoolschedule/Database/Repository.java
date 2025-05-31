@@ -1,107 +1,126 @@
 package com.lynch.schoolschedule.Database;
 
 import android.content.Context;
-
+import com.lynch.schoolschedule.Assessments.Assessment;
 import com.lynch.schoolschedule.Entities.ClassEntity;
 import com.lynch.schoolschedule.Entities.TermEntity;
-import com.lynch.schoolschedule.Assessments.Assessment;
-import com.lynch.schoolschedule.Helpers.ClassHelper;
-import com.lynch.schoolschedule.Helpers.TermHelper;
 import com.lynch.schoolschedule.Helpers.AssessmentHelper;
+import com.lynch.schoolschedule.Helpers.TermHelper;
+import com.lynch.schoolschedule.Helpers.ClassHelper;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Repository {
-
     private static Repository instance;
-    private final ClassHelper classHelper;
-    private final TermHelper termHelper;
     private final AssessmentHelper assessmentHelper;
-    private final ExecutorService executor;
-    private final Context context;
+    private final TermHelper termHelper;
+    private final ClassHelper classHelper;
 
     private Repository(Context context) {
-        this.context = context.getApplicationContext();
-        classHelper = new ClassHelper(this.context);
-        termHelper = new TermHelper(this.context);
-        assessmentHelper = new AssessmentHelper(this.context);
-        executor = Executors.newFixedThreadPool(4);
+        assessmentHelper = new AssessmentHelper(context);
+        termHelper = new TermHelper(context);
+        classHelper = new ClassHelper(context);
     }
 
-    public static synchronized Repository getInstance(Context context) {
+    public static Repository getInstance(Context context) {
         if (instance == null) {
-            instance = new Repository(context);
+            instance = new Repository(context.getApplicationContext());
         }
         return instance;
     }
 
-    public void insertClass(ClassEntity cls) {
-        executor.execute(() -> classHelper.insertClass(cls));
+    // Existing methods...
+
+    // 🆕 Assessments due in next week
+    public List<Assessment> getAssessmentsDueInNextWeek() {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime nextWeek = now.plusWeeks(1);
+        return assessmentHelper.getAssessmentsDueBetween(now, nextWeek);
     }
 
-    public void updateClass(ClassEntity cls) {
-        executor.execute(() -> classHelper.updateClass(cls));
+    // 🆕 Assessments due in next month
+    public List<Assessment> getAssessmentsDueInNextMonth() {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime nextMonth = now.plusMonths(1);
+        return assessmentHelper.getAssessmentsDueBetween(now, nextMonth);
     }
 
-    public void deleteClass(ClassEntity id) {
-        executor.execute(() -> classHelper.deleteClass(id.getId()));
+    // 🆕 Get Term by name
+    public TermEntity getTermByName(String name) {
+        return termHelper.getTermByName(name);
     }
 
-    public ClassEntity getClass(long id) {
-        return classHelper.getClass((int) id);
-    }
 
-    public List<ClassEntity> getAllClasses() {
-        return classHelper.getAllClasses();
-    }
-
-    public List<ClassEntity> getClassesByTermId(int termId) {
-        return classHelper.getClassesByTermId(termId);
+    public List<Assessment> getAssessmentsByTermId(int termId) {
+        return assessmentHelper.getAssessmentsByTermId(termId);
     }
 
     public List<Assessment> getAssessmentsByClassId(int classId) {
         return assessmentHelper.getAssessmentsByClassId(classId);
     }
 
+    public List<ClassEntity> getClassesByTermId(int termId) {
+        return classHelper.getClassesByTermId(termId);
+    }
+
+    public void insertAssessment(Assessment assessment) {
+        assessmentHelper.insertAssessment(assessment);
+    }
     public void insertTerm(TermEntity term) {
-        executor.execute(() -> termHelper.insertTerm(term));
+        termHelper.insertTerm(term);
     }
-
     public void updateTerm(TermEntity term) {
-        executor.execute(() -> termHelper.updateTerm(term));
+        termHelper.updateTerm(term);
+    }
+    public void deleteTerm(int termId) {
+        termHelper.deleteTerm(termId);
+    }
+    public void insertClass(ClassEntity classEntity) {
+        classHelper.insertClass(classEntity);
     }
 
-    public void deleteTerm(long id) {
-        executor.execute(() -> termHelper.deleteTerm((int) id));
+    public void updateClass(ClassEntity classEntity) {
+        classHelper.updateClass(classEntity);
+    }
+    public void deleteClass(int classId) {
+        classHelper.deleteClass(classId);
+    }
+    public void updateAssessment(Assessment assessment) {
+        assessmentHelper.updateAssessment(assessment);
     }
 
-    public TermEntity getTerm(long id) {
-        return termHelper.getTerm((int) id);
+    public void deleteAssessment(Assessment assessment) {
+        assessmentHelper.deleteAssessment(assessment.getId());
     }
 
     public List<TermEntity> getAllTerms() {
         return termHelper.getAllTerms();
     }
-
-    public void insertAssessment(Assessment assessment) {
-        executor.execute(() -> assessmentHelper.insertAssessment(assessment));
+    public List<Assessment> getAllAssessments() {
+        return assessmentHelper.getAllAssessments();
     }
-
-    public void updateAssessment(Assessment assessment) {
-        executor.execute(() -> assessmentHelper.updateAssessment(assessment));
-    }
-
-    public void deleteAssessment(int id) {
-        executor.execute(() -> assessmentHelper.deleteAssessment(id));
-    }
-
     public Assessment getAssessment(int id) {
         return assessmentHelper.getAssessment(id);
     }
+    public List<ClassEntity> getAllClasses() {
+        return classHelper.getAllClasses();
+    }
+    public ClassEntity getClassById(int classId) {
+        return classHelper.getClass(classId);
+    }
+    public TermEntity getTermById(int termId) {
+        return termHelper.getTerm(termId);
+    }
+    public List<TermEntity> searchTerms(String query) {
+        return termHelper.searchTerms(query);
+    }
 
-    public List<Assessment> getAllAssessments() {
-        return assessmentHelper.getAllAssessments();
+    public List<ClassEntity> searchClasses(String query) {
+        return classHelper.searchClasses(query);
+    }
+
+    public List<Assessment> searchAssessments(String query) {
+        return assessmentHelper.searchAssessments(query);
     }
 }

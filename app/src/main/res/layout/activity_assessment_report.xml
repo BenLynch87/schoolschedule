@@ -1,36 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout   xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    >
+
     <Spinner
         android:id="@+id/reportFilterSpinner"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/report_filters"
         android:layout_marginBottom="8dp" />
 
-    <TextView
+    <TextView style="@style/BodyText"
         android:id="@+id/reportTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Upcoming Assessments (Next 30 Days)"
+        android:text="Upcoming Assessments"
         android:textSize="20sp"
         android:textStyle="bold"
         android:paddingBottom="8dp" />
+<LinearLayout  
+    android:id="@+id/headerRow"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    
+    >
 
+    <TextView style="@style/BodyText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Assessment"
+        android:textStyle="bold"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+         />
+
+    <TextView style="@style/BodyText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Class"
+        android:textStyle="bold"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+         />
+
+    <TextView style="@style/BodyText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Term"
+        android:textStyle="bold"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/black" />
+
+    <TextView style="@style/BodyText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:text="Due Date"
+        android:textStyle="bold"
+        android:textSize="14sp" />
+</LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reportRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:padding="4dp" />
 
-        <TextView
-    android:id="@+id/report_text"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="8dp"
-    android:text="Report will appear here" />
-
+    <TextView style="@style/BodyText"
+        android:id="@+id/report_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:text="Report will appear here"
+        android:visibility="gone" />
 </LinearLayout>

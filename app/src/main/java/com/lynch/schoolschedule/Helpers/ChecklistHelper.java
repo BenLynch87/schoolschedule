@@ -12,68 +12,70 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChecklistHelper {
-
     private final SchoolScheduleDbHelper dbHelper;
 
     public ChecklistHelper(Context context) {
         dbHelper = new SchoolScheduleDbHelper(context);
     }
 
+    /**
+     * Insert a new checklist item.
+     */
     public long insertChecklistItem(ChecklistItemEntity item) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("class_id", item.getClassId());
-        values.put("content", item.getContent());
-        values.put("is_done", item.isDone() ? 1 : 0);
+        values.put("assessment_id", item.getAssessmentId());
+        values.put("text", item.getContent());
+        values.put("checked", item.isDone() ? 1 : 0);
         return db.insert("checklist_items", null, values);
     }
 
-    public ChecklistItemEntity getChecklistItem(long id) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query("checklist_items", null, "id = ?", new String[]{String.valueOf(id)}, null, null, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            ChecklistItemEntity item = new ChecklistItemEntity(
-                    cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("class_id")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("content")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("is_done")) == 1
-            );
-            cursor.close();
-            return item;
-        }
-        return null;
+    /**
+     * Update an existing checklist item.
+     */
+    public int updateChecklistItem(ChecklistItemEntity item) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("assessment_id", item.getAssessmentId());
+        values.put("text", item.getContent());
+        values.put("checked", item.isDone() ? 1 : 0);
+        return db.update("checklist_items", values, "id=?", new String[]{String.valueOf(item.getId())});
     }
 
-    public List<ChecklistItemEntity> getChecklistItemsForClass(int classId) {
-        List<ChecklistItemEntity> list = new ArrayList<>();
+    /**
+     * Retrieve all checklist items for a specific assessment.
+     */
+    public List<ChecklistItemEntity> getChecklistItemsForAssessment(int assessmentId) {
+        List<ChecklistItemEntity> items = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query("checklist_items", null, "class_id = ?", new String[]{String.valueOf(classId)}, null, null, null);
+        Cursor cursor = db.query(
+                "checklist_items",
+                null,
+                "assessment_id=?",
+                new String[]{String.valueOf(assessmentId)},
+                null, null, null
+        );
+
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 ChecklistItemEntity item = new ChecklistItemEntity(
                         cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                        cursor.getInt(cursor.getColumnIndexOrThrow("class_id")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("content")),
-                        cursor.getInt(cursor.getColumnIndexOrThrow("is_done")) == 1
+                        cursor.getInt(cursor.getColumnIndexOrThrow("assessment_id")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("text")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("checked")) == 1
                 );
-                list.add(item);
+                items.add(item);
             } while (cursor.moveToNext());
             cursor.close();
         }
-        return list;
+        return items;
     }
 
-    public int updateChecklistItem(ChecklistItemEntity item) {
+    /**
+     * Delete all checklist items for a specific assessment.
+     */
+    public void deleteChecklistItemsForAssessment(int assessmentId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("class_id", item.getClassId());
-        values.put("content", item.getContent());
-        values.put("is_done", item.isDone() ? 1 : 0);
-        return db.update("checklist_items", values, "id = ?", new String[]{String.valueOf(item.getId())});
-    }
-
-    public int deleteChecklistItem(long id) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        return db.delete("checklist_items", "id = ?", new String[]{String.valueOf(id)});
+        db.delete("checklist_items", "assessment_id=?", new String[]{String.valueOf(assessmentId)});
     }
 }

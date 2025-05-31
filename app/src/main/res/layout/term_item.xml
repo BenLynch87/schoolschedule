@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/itemBackground"
     android:layout_margin="2dp">
 
-    <LinearLayout
-        android:layout_width="409dp"
+    <LinearLayout  
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/teal_200"
+        
         android:orientation="vertical"
-        android:padding="4dp"
+        
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <TextView style="@style/BodyText"
             android:id="@+id/textTermName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,12 +25,12 @@
             android:textAlignment="center"
             android:textSize="24sp" />
 
-        <LinearLayout
+        <LinearLayout android:background="@color/backgroundColor" android:padding="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <TextView style="@style/BodyText"
                 android:id="@+id/textTermStart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,7 +38,7 @@
                 android:text="TextView"
                 android:textAlignment="viewEnd" />
 
-            <TextView
+            <TextView style="@style/BodyText"
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,7 +46,7 @@
                 android:text="@string/To_divider"
                 android:textAlignment="center" />
 
-            <TextView
+            <TextView style="@style/BodyText"
                 android:id="@+id/textTermEnd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

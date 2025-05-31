@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.lynch.schoolschedule.Assessments.Assessment;
+import com.lynch.schoolschedule.Assessments.AssessmentFactory;
 import com.lynch.schoolschedule.Database.SchoolScheduleDbHelper;
 import com.lynch.schoolschedule.Entities.TermEntity;
 
@@ -62,6 +64,42 @@ public class TermHelper {
         }
         return list;
     }
+    public TermEntity getTermByName(String name) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String query = "SELECT * FROM terms WHERE name = ?";
+        String[] args = {name};
+        Cursor cursor = db.rawQuery(query, args);
+        TermEntity term = null;
+        if (cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            String termName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            String startDate = cursor.getString(cursor.getColumnIndexOrThrow("start_date"));
+            String endDate = cursor.getString(cursor.getColumnIndexOrThrow("end_date"));
+            term = new TermEntity(id, termName, startDate, endDate);
+        }
+        cursor.close();
+        return term;
+    }
+
+    public List<TermEntity> searchTerms(String query) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        List<TermEntity> results = new ArrayList<>();
+        String sql = "SELECT * FROM terms WHERE name LIKE ?";
+        String[] args = {"%" + query + "%"};
+        Cursor cursor = db.rawQuery(sql, args);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            String termName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            String startDate = cursor.getString(cursor.getColumnIndexOrThrow("start_date"));
+            String endDate = cursor.getString(cursor.getColumnIndexOrThrow("end_date"));
+
+            TermEntity term = new TermEntity(id, termName, startDate, endDate);
+            results.add(term);
+        }
+        cursor.close();
+        return results;
+    }
+
 
     public int updateTerm(TermEntity term) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();

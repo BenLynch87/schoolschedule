@@ -102,4 +102,5 @@ public class ClassEntity {
     public void setEmail(String email) {
         this.notes = email;
     }
+
 }

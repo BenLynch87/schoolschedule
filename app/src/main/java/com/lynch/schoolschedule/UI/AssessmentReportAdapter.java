@@ -1,6 +1,7 @@
 package com.lynch.schoolschedule.UI;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,44 +14,79 @@ import com.lynch.schoolschedule.Assessments.Assessment;
 import com.lynch.schoolschedule.R;
 
 import java.util.List;
+import java.util.Map;
 
-public class AssessmentReportAdapter extends RecyclerView.Adapter<AssessmentReportAdapter.ReportViewHolder> {
+public class AssessmentReportAdapter extends RecyclerView.Adapter<AssessmentReportAdapter.AssessmentReportViewHolder> {
+
     private final Context context;
-    private final List<Assessment> assessmentList;
-    private final int filterType;
+    private List<Assessment> assessments;
+    private Map<Integer, String> classNamesMap;
+    private Map<Integer, Integer> termIdsMap;
+    private Map<Integer, String> termNamesMap;
 
-    public AssessmentReportAdapter(Context context, List<Assessment> data, int filterType) {
+    public AssessmentReportAdapter(Context context,
+                                   List<Assessment> assessments,
+                                   Map<Integer, String> classNamesMap,
+                                   Map<Integer, Integer> termIdsMap,
+                                   Map<Integer, String> termNamesMap) {
         this.context = context;
-        this.assessmentList = data;
-        this.filterType = filterType;
+        this.assessments = assessments;
+        this.classNamesMap = classNamesMap;
+        this.termIdsMap = termIdsMap;
+        this.termNamesMap = termNamesMap;
+    }
+
+    public void setAssessments(List<Assessment> assessments) {
+        this.assessments = assessments;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public ReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.assessment_item, parent, false);
-        return new ReportViewHolder(view);
+    public AssessmentReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.assessment_report_item, parent, false);
+        return new AssessmentReportViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReportViewHolder holder, int position) {
-        Assessment assessment = assessmentList.get(position);
-        holder.title.setText(assessment.getTitle());
-        holder.type.setText(assessment.getClass().getSimpleName());
+    public void onBindViewHolder(@NonNull AssessmentReportViewHolder holder, int position) {
+        Assessment assessment = assessments.get(position);
+
+        // Existing bindings
+        holder.textAssessmentName.setText(assessment.getTitle());
+        String className = classNamesMap.getOrDefault(assessment.getClassId(), "Unknown Class");
+        holder.textClassName.setText(className);
+        int termId = termIdsMap.getOrDefault(assessment.getClassId(), -1);
+        String termName = termNamesMap.getOrDefault(termId, "Unknown Term");
+        holder.textTermName.setText(termName);
+        holder.textDueDateTime.setText(assessment.getDueDate());
+
+        // NEW: Click listener
+        holder.itemView.setOnClickListener(v -> {
+            // Use the context to start the detail activity
+            Intent intent = new Intent(context, AssessmentDetailActivity.class);
+            intent.putExtra("assessmentId", assessment.getId());
+            context.startActivity(intent);
+        });
     }
 
     @Override
     public int getItemCount() {
-        return assessmentList != null ? assessmentList.size() : 0;
+        return assessments != null ? assessments.size() : 0;
     }
 
-    public static class ReportViewHolder extends RecyclerView.ViewHolder {
-        TextView title, type;
+    public static class AssessmentReportViewHolder extends RecyclerView.ViewHolder {
+        TextView textAssessmentName;
+        TextView textClassName;
+        TextView textTermName;
+        TextView textDueDateTime;
 
-        public ReportViewHolder(@NonNull View itemView) {
+        public AssessmentReportViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.textAssessmentName);
-            type = itemView.findViewById(R.id.textAssessmentType);
+            textAssessmentName = itemView.findViewById(R.id.textAssessmentName);
+            textClassName = itemView.findViewById(R.id.textClassName);
+            textTermName = itemView.findViewById(R.id.textTermName);
+            textDueDateTime = itemView.findViewById(R.id.textDueDateTime);
         }
     }
 }

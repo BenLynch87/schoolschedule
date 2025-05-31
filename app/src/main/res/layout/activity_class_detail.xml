@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".UI.ClassDetailActivity">
 
-    <LinearLayout
+    <LinearLayout  
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        >
 
         <EditText
             android:id="@+id/textClassNameField"
@@ -41,14 +41,14 @@
             android:layout_height="wrap_content"
             android:hint="Instructor Email" />
 
-        <Button
+        <Button style="@style/AppButton"
             android:id="@+id/DateStartPickerbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="dateStartPicker"
             android:text="Select Start Date" />
 
-        <Button
+        <Button style="@style/AppButton"
             android:id="@+id/DateEndPickerbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,13 +78,13 @@
             app:srcCompat="@android:drawable/ic_menu_share"
             android:contentDescription="Share Note" />
 
-        <LinearLayout
+        <LinearLayout android:background="@color/backgroundColor" android:padding="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
 
-            <Button
+            <Button style="@style/AppButton"
                 android:id="@+id/SaveAssessmentButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                 android:onClick="saveClass"
                 android:text="Save" />
 
-            <Button
+            <Button style="@style/AppButton"
                 android:id="@+id/CancelAssessmentButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                 android:onClick="cancelClass"
                 android:text="Cancel" />
 
-            <Button
+            <Button style="@style/AppButton"
                 android:id="@+id/DeleteAssessmentButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                 android:text="Delete" />
         </LinearLayout>
 
-        <TextView
+        <TextView style="@style/BodyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Assessments"

@@ -1,7 +1,6 @@
 package com.lynch.schoolschedule.UI;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +19,12 @@ import java.util.List;
 
 public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.AssessmentViewHolder> {
     private final Context context;
+    private final OnAssessmentClickListener listener;
     private List<Assessment> assessments = new ArrayList<>();
 
-    public AssessmentAdapter(Context context, List<Assessment> assessments) {
+    public AssessmentAdapter(List<Assessment> assessments, OnAssessmentClickListener listener, Context context) {
         this.context = context;
+        this.listener = listener;
         this.assessments = assessments;
     }
 
@@ -46,12 +47,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
         holder.type.setText(assessment instanceof ObjectiveAssessment ? "Objective" : "Performance");
         holder.end.setText(assessment.getDueDate().toString());
 
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, AssessmentDetailActivity.class);
-            intent.putExtra("assessmentId", assessment.getId());
-            intent.putExtra("assessmentType", assessment instanceof ObjectiveAssessment ? "Objective" : "Performance");
-            context.startActivity(intent);
-        });
+        holder.itemView.setOnClickListener(v -> listener.onAssessmentClick(position));
     }
 
     @Override
@@ -68,5 +64,9 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
             type = itemView.findViewById(R.id.textAssessmentType);
             end = itemView.findViewById(R.id.textAssessmentEnd);
         }
+    }
+
+    public interface OnAssessmentClickListener {
+        void onAssessmentClick(int position);
     }
 }
