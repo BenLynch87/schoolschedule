@@ -8,14 +8,14 @@ public class Assessment {
     private String dueDate;
     private String type;
 
-    public Assessment(int id, int classId, String title, String dueDate) {
+    public Assessment(int id, int classId, String title, String dueDate, String type) {
         this.id = id;
         this.classId = classId;
         this.title = title;
         this.dueDate = dueDate;
     }
     public Assessment() {
-        this(0, 0, "", "");
+        this(0, 0, "", "", "");
     }
 
     public int getId() {

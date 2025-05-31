@@ -62,7 +62,9 @@ public class ClassHelper {
                     cursor.getString(cursor.getColumnIndexOrThrow("end_date")),
                     cursor.getString(cursor.getColumnIndexOrThrow("status")),
                     cursor.getInt(cursor.getColumnIndexOrThrow("term_id")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("notes"))
+                    cursor.getString(cursor.getColumnIndexOrThrow("notes")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("phone")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("email"))
             );
             cursor.close();
             return cls;
@@ -84,7 +86,9 @@ public class ClassHelper {
                         cursor.getString(cursor.getColumnIndexOrThrow("end_date")),
                         cursor.getString(cursor.getColumnIndexOrThrow("status")),
                         cursor.getInt(cursor.getColumnIndexOrThrow("term_id")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("notes"))
+                        cursor.getString(cursor.getColumnIndexOrThrow("notes")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("phone")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("email"))
                 );
                 classes.add(cls);
             } while (cursor.moveToNext());
@@ -107,7 +111,9 @@ public class ClassHelper {
                         cursor.getString(cursor.getColumnIndexOrThrow("end_date")),
                         cursor.getString(cursor.getColumnIndexOrThrow("status")),
                         cursor.getInt(cursor.getColumnIndexOrThrow("term_id")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("notes"))
+                        cursor.getString(cursor.getColumnIndexOrThrow("notes")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("phone")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("email"))
                 );
                 classes.add(cls);
             } while (cursor.moveToNext());

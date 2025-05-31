@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,10 +22,10 @@ public class ClassActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classes);
-
+        List<ClassEntity> classEntities=repository.getAllClasses();
         RecyclerView recyclerView = findViewById(R.id.allClassList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ClassAdapter(this);
+        adapter = new ClassAdapter(this, classEntities);
         recyclerView.setAdapter(adapter);
 
         repository = Repository.getInstance(getApplication());

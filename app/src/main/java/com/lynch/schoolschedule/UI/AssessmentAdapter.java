@@ -22,8 +22,9 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
     private final Context context;
     private List<Assessment> assessments = new ArrayList<>();
 
-    public AssessmentAdapter(Context context) {
+    public AssessmentAdapter(Context context, List<Assessment> assessments) {
         this.context = context;
+        this.assessments = assessments;
     }
 
     public void setAssessments(List<Assessment> list) {

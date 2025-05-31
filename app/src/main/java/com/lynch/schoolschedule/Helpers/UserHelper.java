@@ -22,8 +22,7 @@ public class UserHelper {
     public long insertUser(UserEntity user) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("name", user.getName());
-        values.put("email", user.getEmail());
+        values.put("username", user.getName());
         values.put("password", user.getPassword());
         return db.insert("users", null, values);
     }
@@ -34,8 +33,7 @@ public class UserHelper {
         if (cursor != null && cursor.moveToFirst()) {
             UserEntity user = new UserEntity(
                     cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("name")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("email")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("username")),
                     cursor.getString(cursor.getColumnIndexOrThrow("password"))
             );
             cursor.close();
@@ -46,12 +44,11 @@ public class UserHelper {
 
     public UserEntity getUserByUsername(String username) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query("users", null, "name = ?", new String[]{username}, null, null, null);
+        Cursor cursor = db.query("users", null, "username = ?", new String[]{username}, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             UserEntity user = new UserEntity(
                     cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("name")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("email")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("username")),
                     cursor.getString(cursor.getColumnIndexOrThrow("password"))
             );
             cursor.close();
@@ -68,8 +65,7 @@ public class UserHelper {
             do {
                 UserEntity user = new UserEntity(
                         cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("name")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("email")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("username")),
                         cursor.getString(cursor.getColumnIndexOrThrow("password"))
                 );
                 users.add(user);
@@ -82,8 +78,7 @@ public class UserHelper {
     public int updateUser(UserEntity user) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("name", user.getName());
-        values.put("email", user.getEmail());
+        values.put("username", user.getName());
         values.put("password", user.getPassword());
         return db.update("users", values, "id = ?", new String[]{String.valueOf(user.getId())});
     }

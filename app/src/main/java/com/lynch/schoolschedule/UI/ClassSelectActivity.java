@@ -1,11 +1,8 @@
 package com.lynch.schoolschedule.UI;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,7 +10,6 @@ import com.lynch.schoolschedule.Database.Repository;
 import com.lynch.schoolschedule.Entities.ClassEntity;
 import com.lynch.schoolschedule.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ClassSelectActivity extends AppCompatActivity {
@@ -32,8 +28,8 @@ public class ClassSelectActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         termId = getIntent().getIntExtra("termId", -1);
-
-        adapter = new ClassAdapter(this);
+        List<ClassEntity> classEntities = repository.getAllClasses();
+        adapter = new ClassAdapter(this, classEntities);
         recyclerView.setAdapter(adapter);
 
         adapter.setOnClassSelectListener(selected -> {

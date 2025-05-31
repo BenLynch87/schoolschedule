@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +19,7 @@ public class TermsActivity extends AppCompatActivity {
     private Repository repository;
     private TermAdapter adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +33,13 @@ public class TermsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         List<TermEntity> terms = repository.getAllTerms();
-        adapter.setTerms(terms);
-
-
+        adapter.setTerms(terms); // Removed LiveData.observe() to avoid crash
     }
 
     public void addTerm(View view) {
         Intent intent = new Intent(this, TermDetailActivity.class);
         startActivity(intent);
     }
+
+
 }

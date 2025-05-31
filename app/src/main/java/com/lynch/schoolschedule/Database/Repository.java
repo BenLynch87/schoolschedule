@@ -45,8 +45,8 @@ public class Repository {
         executor.execute(() -> classHelper.updateClass(cls));
     }
 
-    public void deleteClass(long id) {
-        executor.execute(() -> classHelper.deleteClass((int) id));
+    public void deleteClass(ClassEntity id) {
+        executor.execute(() -> classHelper.deleteClass(id.getId()));
     }
 
     public ClassEntity getClass(long id) {
@@ -59,6 +59,10 @@ public class Repository {
 
     public List<ClassEntity> getClassesByTermId(int termId) {
         return classHelper.getClassesByTermId(termId);
+    }
+
+    public List<Assessment> getAssessmentsByClassId(int classId) {
+        return assessmentHelper.getAssessmentsByClassId(classId);
     }
 
     public void insertTerm(TermEntity term) {

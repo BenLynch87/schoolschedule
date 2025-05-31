@@ -29,8 +29,9 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         this.selectListener = listener;
     }
 
-    public ClassAdapter(Context context) {
+    public ClassAdapter(Context context, List<ClassEntity> classEntities) {
         this.context = context;
+        this.classes = classEntities;
     }
 
     public void setClasses(List<ClassEntity> classList) {

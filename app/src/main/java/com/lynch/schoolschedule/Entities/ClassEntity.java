@@ -9,8 +9,10 @@ public class ClassEntity {
     private String status;
     private int termId;
     private String notes;
+    private String phone;
+    private String email;
 
-    public ClassEntity(int id, String className, String instructor, String startDate, String endDate, String status, int termId, String notes) {
+    public ClassEntity(int id, String className, String instructor, String startDate, String endDate, String status, int termId, String notes, String phone, String email) {
         this.id = id;
         this.className = className;
         this.instructor = instructor;
@@ -19,6 +21,8 @@ public class ClassEntity {
         this.status = status;
         this.termId = termId;
         this.notes = notes;
+        this.phone = phone;
+        this.email = email;
     }
 
     public int getId() {
@@ -53,6 +57,14 @@ public class ClassEntity {
         return notes;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -83,5 +95,11 @@ public class ClassEntity {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+    public void setPhone(String phone) {
+        this.notes = phone;
+    }
+    public void setEmail(String email) {
+        this.notes = email;
     }
 }

@@ -75,4 +75,25 @@ public class AssessmentHelper {
         cursor.close();
         return list;
     }
+    public List<Assessment> getAssessmentsByClassId(int classId) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        List<Assessment> list = new ArrayList<>();
+        String selection = "class_id = ?";
+        String[] selectionArgs = { String.valueOf(classId) };
+
+        Cursor cursor = db.query("assessments", null, selection, selectionArgs, null, null, null);
+        while (cursor.moveToNext()) {
+            Assessment a = new Assessment();
+            a.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
+            a.setClassId(cursor.getInt(cursor.getColumnIndexOrThrow("class_id")));
+            a.setTitle(cursor.getString(cursor.getColumnIndexOrThrow("title")));
+            a.setDueDate(cursor.getString(cursor.getColumnIndexOrThrow("due_date")));
+            a.setType(cursor.getString(cursor.getColumnIndexOrThrow("type")));
+            list.add(a);
+        }
+        cursor.close();
+        return list;
+    }
+
+
 }
