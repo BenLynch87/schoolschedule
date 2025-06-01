@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lynch.schoolschedule.Assessments.Assessment;
@@ -46,6 +47,8 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
         holder.title.setText(assessment.getTitle());
         holder.type.setText(assessment instanceof ObjectiveAssessment ? "Objective" : "Performance");
         holder.end.setText(assessment.getDueDate().toString());
+        holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.itemBackground));
+
 
         holder.itemView.setOnClickListener(v -> listener.onAssessmentClick(position));
     }
@@ -60,6 +63,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
 
         public AssessmentViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.itemBackground));
             title = itemView.findViewById(R.id.textAssessmentName);
             type = itemView.findViewById(R.id.textAssessmentType);
             end = itemView.findViewById(R.id.textAssessmentEnd);

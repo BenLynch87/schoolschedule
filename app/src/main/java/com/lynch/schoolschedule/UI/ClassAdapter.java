@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lynch.schoolschedule.Entities.ClassEntity;
@@ -52,6 +53,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         holder.name.setText(course.getClassName());
         holder.start.setText(course.getStartDate());
         holder.end.setText(course.getEndDate());
+        holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.itemBackground));
 
         holder.itemView.setOnClickListener(v -> {
             if (selectListener != null) {
@@ -74,6 +76,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
 
         public ClassViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.itemBackground));
             name = itemView.findViewById(R.id.textClassName);
             start = itemView.findViewById(R.id.textClassStart);
             end = itemView.findViewById(R.id.textClassEnd);

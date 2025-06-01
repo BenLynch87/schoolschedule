@@ -5,15 +5,19 @@ import com.lynch.schoolschedule.Helpers.SessionManager;
 
 public class SchoolScheduleApp extends Application {
 
+    private SessionManager sessionManager;
+
     @Override
     public void onCreate() {
         super.onCreate();
-
-        SessionManager sessionManager = new SessionManager(this);
-
-        // Only clear session on cold start if Remember Me is not enabled
+        sessionManager = new SessionManager(this);
         if (!sessionManager.isRememberMeEnabled()) {
             sessionManager.logout();
         }
+    }
+
+    // Setter for tests
+    public void setSessionManager(SessionManager sessionManager) {
+        this.sessionManager = sessionManager;
     }
 }

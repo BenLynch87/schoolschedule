@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lynch.schoolschedule.Entities.TermEntity;
@@ -42,6 +43,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
         holder.name.setText(term.getTermName());
         holder.start.setText(term.getStartDate());
         holder.end.setText(term.getEndDate());
+        holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.itemBackground));
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, TermDetailActivity.class);
@@ -60,6 +62,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
 
         public TermViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.itemBackground));
             name = itemView.findViewById(R.id.textTermName);
             start = itemView.findViewById(R.id.textTermStart);
             end = itemView.findViewById(R.id.textTermEnd);

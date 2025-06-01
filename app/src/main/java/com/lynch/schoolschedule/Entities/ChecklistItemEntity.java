@@ -19,6 +19,12 @@ public class ChecklistItemEntity {
         this.isDone = isDone;
     }
 
+    public ChecklistItemEntity() {
+        this.assessmentId = 0;
+        this.content = "default";
+        this.isDone = false;
+    }
+
     public int getId() {
         return id;
     }

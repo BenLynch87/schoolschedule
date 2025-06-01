@@ -25,6 +25,19 @@ public class ClassEntity {
         this.email = email;
     }
 
+    public ClassEntity() {
+        this.id = 0;
+        this.className = "default";
+        this.instructor = "default";
+        this.startDate = "default";
+        this.endDate = "default";
+        this.status = "default";
+        this.termId = 0;
+        this.notes = "default";
+        this.phone = "default";
+        this.email = "default";
+    }
+
     public int getId() {
         return id;
     }

@@ -13,6 +13,13 @@ public class TermEntity {
         this.endDate = endDate;
     }
 
+    public TermEntity() {
+        this.id = 0;
+        this.termName = "default";
+        this.startDate = "default";
+        this.endDate = "default";
+    }
+
     public int getId() {
         return id;
     }

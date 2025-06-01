@@ -17,6 +17,12 @@ public class UserEntity {
         this.password = password;
     }
 
+    public UserEntity() {
+        this.id=1;
+        this.name = "default";
+        this.password = "default";
+    }
+
     public int getId() {
         return id;
     }
